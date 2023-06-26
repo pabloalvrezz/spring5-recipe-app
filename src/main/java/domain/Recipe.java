@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +35,14 @@ public class Recipe {
 
 	@Lob
 	private Byte[] image;
+	
+	@Enumerated(value  = EnumType.ORDINAL)
+	private Difficulty difficulty;
+	
+	// se pone el tipo de cascade porque si eliminamos una receta queremos
+	// eliminar las notas
+	@OneToOne(cascade = CascadeType.ALL)
+	private Notes notes;
 
 	public Long getId() {
 		return id;
@@ -41,12 +51,6 @@ public class Recipe {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	// se pone el tipo de cascade porque si eliminamos una receta queremos
-	// eliminar las notas
-
-	@OneToOne(cascade = CascadeType.ALL)
-	private Notes notes;
 
 	public String getDescription() {
 		return description;
@@ -118,6 +122,14 @@ public class Recipe {
 
 	public void setNotes(Notes notes) {
 		this.notes = notes;
+	}
+
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
 	}
 
 }
