@@ -1,4 +1,4 @@
-package guru.domain;
+package guru.springframework.domain;
 
 import java.util.Set;
 
